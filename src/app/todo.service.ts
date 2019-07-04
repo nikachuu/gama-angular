@@ -16,6 +16,10 @@ export class TodoService {
     return this.httpClient.get<Todo[]>('http://localhost:3000/todos');
   }
 
+  adicionarTodo(todo: Todo) {
+    return this.httpClient.post('http://localhost:3000/todos', todo);
+  }
+
   incrementCounter() {
     this.privCounter.next(this.privCounter.value + 1);
   }

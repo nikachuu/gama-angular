@@ -1,5 +1,7 @@
+import { Todo } from 'src/typings/todo';
 import { Component, OnInit } from '@angular/core';
 import { TodoService } from '../todo.service';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-todos-list',
@@ -8,15 +10,18 @@ import { TodoService } from '../todo.service';
 })
 export class TodosListComponent implements OnInit {
 
-  todos = [];
+  // todos: Todo[] = [];
+
+  todos$: Observable<Todo[]>; // async todo vem aqui e adiciona o async pipe no HTML
 
   constructor(private todoService: TodoService) { }
 
   ngOnInit() {
-    this.todoService.getTodos().subscribe(value => {
-      console.log(value);
-      this.todos = value;
-    });
+    this.todos$ = this.todoService.getTodos();
+    // this.todoService.getTodos().subscribe(value => {
+    //   console.log(value);
+    //   this.todos = value;
+    // });
   }
 
 }

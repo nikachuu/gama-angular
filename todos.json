@@ -1,5 +1,5 @@
 {
-  "todos" : [
+  "todos": [
     {
       "id": 1,
       "title": "Aula 1",
@@ -20,6 +20,26 @@
       "description": "Aprender sobre formulários.",
       "finished": false,
       "date": "2018-11-02"
+    },
+    {
+      "id": 4,
+      "title": "Estudar ",
+      "description": "Preciso estudar angular, socorro cara",
+      "finished": false,
+      "date": "2019-05-22"
+    },
+    {
+      "id": 5,
+      "title": "Estudar mais angular",
+      "description": "Tá complicado",
+      "date": "2019-07-03"
+    },
+    {
+      "id": 6,
+      "title": "Testando checkbox",
+      "description": "Não ta querendo retornar true",
+      "finished": true,
+      "date": "2019-07-03"
     }
   ]
 }

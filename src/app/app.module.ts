@@ -9,10 +9,16 @@ import { HttpClientModule } from '@angular/common/http';
 import { RouterModule, Routes } from '@angular/router';
 import { HomeComponent } from './home/home.component';
 import { CepComponent } from './cep/cep.component';
+import { CepTextoComponent } from './cep-texto/cep-texto.component';
+import { FormsModule } from '@angular/forms';
+import { AddTodoComponent } from './add-todo/add-todo.component';
+import { BoolPipe } from './bool.pipe';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
   { path: 'todos', component: TodosListComponent },
+  { path: 'todos/add', component: AddTodoComponent },
+  { path: 'cep', component: CepTextoComponent },
   { path: 'cep/:num', component: CepComponent }
 ];
 
@@ -24,12 +30,16 @@ const routes: Routes = [
     CounterButtonsComponent,
     TodosListComponent,
     HomeComponent,
-    CepComponent
+    CepComponent,
+    CepTextoComponent,
+    AddTodoComponent,
+    BoolPipe
   ],
   imports: [
     BrowserModule,
     HttpClientModule,
-    RouterModule.forRoot(routes)
+    RouterModule.forRoot(routes),
+    FormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

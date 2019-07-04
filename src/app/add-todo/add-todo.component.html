@@ -1,0 +1,77 @@
+<form #form="ngForm">
+  {{ todo | json }}
+  <input
+    placeholder="Digite o título"
+    type="text"
+    name="todoTitle"
+    [(ngModel)]="todo.title"
+    #titleInput="ngModel"
+    required>
+  <input
+    placeholder="Digite a descrição"
+    type="text"
+    name="todoDescription"
+    [(ngModel)]="todo.description"
+    #descInput="ngModel"
+    required>
+  <input
+    placeholder="Insira a data"
+    type="date"
+    name="todoDate"
+    [(ngModel)]="todo.date"
+    #dateInput="ngModel"
+    required>
+  <span>Finalizado? </span>
+  <input type="checkbox" name="finished" [(ngModel)]="todo.finished">
+  <button [disabled]="form.invalid" (click)="enviarTodo()">Enviar</button>
+</form>
+
+<!-- <form #form="ngForm">
+  <div>
+    Título
+
+    <input
+      type="text"
+      [(ngModel)]="todo.title"
+      #title="ngModel"
+      required
+      name="title"
+    />
+
+    <div *ngIf="title.errors && title.touched">
+      <div *ngIf="title?.errors.required">Título é obrigatório</div>
+    </div>
+  </div>
+
+  <div>
+    Descrição
+
+    <input
+      type="text"
+      [(ngModel)]="todo.description"
+      #descricao="ngModel"
+      required
+      name="descricao"
+    />
+
+    <div *ngIf="descricao.errors && descricao.touched">
+      <div *ngIf="descricao?.errors.required">Descrição é obrigatória</div>
+    </div>
+  </div>
+
+  <div>
+    Data:
+
+    <input
+      type="date"
+      [(ngModel)]="todo.date"
+      #date="ngModel"
+      required
+      name="date"
+    />
+  </div>
+
+  <div><input type="checkbox" [(ngModel)]="todo.finished" name="finished" /> Finalizado?</div>
+
+  <button [disabled]="form.invalid" (click)="enviarTodo()">Enviar</button>
+ </form> -->

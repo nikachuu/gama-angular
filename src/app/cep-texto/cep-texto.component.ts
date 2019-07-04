@@ -1,0 +1,23 @@
+import { CepService } from './../cep.service';
+import { Component, OnInit } from '@angular/core';
+
+@Component({
+  selector: 'app-cep-texto',
+  templateUrl: './cep-texto.component.html',
+  styleUrls: ['./cep-texto.component.css']
+})
+export class CepTextoComponent implements OnInit {
+  cep: any = {};
+  cepTexto = '';
+  constructor(private cepService: CepService) { }
+
+  ngOnInit() {
+  }
+
+  buscarCep() {
+    this.cepService.getCep(this.cepTexto).subscribe(value => {
+      this.cep = value;
+    });
+  }
+
+}
