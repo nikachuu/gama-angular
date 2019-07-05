@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { map, debounceTime } from 'rxjs/operators';
-import { TodoService } from './todo.service';
+import { TodoService } from './todo/todo.service';
 
 @Component({
   selector: 'app-root',

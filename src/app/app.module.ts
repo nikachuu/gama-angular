@@ -1,39 +1,31 @@
+import { CepModule } from './cep/cep.module';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { AppComponent } from './app.component';
-import { TodoItemComponent } from './todo-item/todo-item.component';
 import { CounterComponent } from './counter/counter.component';
 import { CounterButtonsComponent } from './counter-buttons/counter-buttons.component';
-import { TodosListComponent } from './todos-list/todos-list.component';
 import { HttpClientModule } from '@angular/common/http';
 import { RouterModule, Routes } from '@angular/router';
 import { HomeComponent } from './home/home.component';
-import { CepComponent } from './cep/cep.component';
-import { CepTextoComponent } from './cep-texto/cep-texto.component';
 import { FormsModule } from '@angular/forms';
-import { AddTodoComponent } from './add-todo/add-todo.component';
-import { BoolPipe } from './bool.pipe';
+import { TodoModule } from './todo/todo.module';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
-  { path: 'todos', component: TodosListComponent },
-  { path: 'todos/add', component: AddTodoComponent },
-  { path: 'cep', component: CepTextoComponent },
-  { path: 'cep/:num', component: CepComponent }
+  // { path: 'todos', component: TodosListComponent },
+  // { path: 'todos/add', component: AddTodoComponent },
+  // sintaxe antes do angular 8 { path: 'todos', loadChildren: './todo/todo.module.ts#TodoModule'}
+  { path: 'todos', loadChildren: () => import('./todo/todo.module').then(m => m.TodoModule) },
+  { path: 'cep', loadChildren: () => import('./cep/cep.module').then(m => m.CepModule) },
+  { path: 'auth', loadChildren: () => import('./auth/auth.module').then(m => m.AuthModule) }
 ];
 
 @NgModule({
   declarations: [
     AppComponent,
-    TodoItemComponent,
     CounterComponent,
     CounterButtonsComponent,
-    TodosListComponent,
-    HomeComponent,
-    CepComponent,
-    CepTextoComponent,
-    AddTodoComponent,
-    BoolPipe
+    HomeComponent
   ],
   imports: [
     BrowserModule,

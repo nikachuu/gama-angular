@@ -1,4 +1,4 @@
-import { CepService } from './../cep.service';
+import { CepService } from '../cep.service';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
