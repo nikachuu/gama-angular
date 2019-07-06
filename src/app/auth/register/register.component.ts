@@ -18,10 +18,22 @@ export class RegisterComponent implements OnInit {
   }
 
   sendRegister() {
+
+    if ( this.senha !== this.confirmarSenha ) {
+      alert('Senhas não coincidem.');
+      return;
+    }
+
     this.authService.createAccount(this.email, this.senha)
-      .subscribe((value) => {
+      .subscribe((value: any) => {
         alert('Usuário criado com sucesso');
         console.log(value);
+        localStorage.setItem('token', value.idToken);
+
+        this.authService.setUser({
+          id: value.localId,
+          email: value.email
+        });
       });
   }
 }

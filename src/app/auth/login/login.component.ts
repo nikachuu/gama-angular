@@ -23,7 +23,10 @@ export class LoginComponent implements OnInit {
         alert('Login efetuado com sucesso!');
         console.log(value);
         localStorage.setItem('token', value.idToken);
-        this.authService.setUser({ email: value.email });
+        this.authService.setUser({
+          id: value.localId,
+          email: value.email
+        });
       },
       error => {
         console.log(error);

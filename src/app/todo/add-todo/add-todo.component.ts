@@ -1,7 +1,8 @@
+import { AuthService } from './../../auth/auth.service';
 import { TodoService } from '../todo.service';
 import { Todo } from 'src/typings/todo';
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-add-todo',
@@ -16,21 +17,47 @@ export class AddTodoComponent implements OnInit {
     title: '',
     description: '',
     finished: false,
-    date: ''
+    date: '',
+    userId: ''
   };
 
+  isEditting = false;
 
-  constructor(private todoService: TodoService, private router: Router) { }
+  constructor(
+    private todoService: TodoService,
+    private router: Router,
+    private authService: AuthService,
+    private activatedRoute: ActivatedRoute) { }
 
   ngOnInit() {
-  }
+    this.activatedRoute.params.subscribe((params) => {
+      if (params.id) {
+        this.isEditting = true;
+        this.todoService.getTodoById(params.id).subscribe((todo: Todo) => {
+          this.todo = todo;
+        });
+      }
+    });
 
-  enviarTodo() {
-    console.log(this.todo);
-    this.todoService.adicionarTodo(this.todo).subscribe(() => {
-      alert('Todo adicionado com sucesso!');
-      this.router.navigateByUrl('/todos');
+    this.authService.currentUser.subscribe((user) => {
+      this.todo.userId = user.id;
     });
   }
 
+  enviarTodo() {
+
+    if ( this.isEditting ) {
+      console.log(this.todo);
+      this.todoService.updateTodo(this.todo.id, this.todo).subscribe(() => {
+        alert('Todo atualizado com sucesso!');
+        this.router.navigateByUrl('/todos');
+      });
+    } else {
+      console.log(this.todo);
+      this.todoService.adicionarTodo(this.todo).subscribe(() => {
+        alert('Todo adicionado com sucesso!');
+        this.router.navigateByUrl('/todos');
+      });
+    }
+  }
 }

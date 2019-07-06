@@ -1,10 +1,25 @@
-<nav class="navbar navbar-light bg-light">
+<div *ngIf="user$ | async; else deslogado">
+    <nav class="navbar navbar-light bg-light">
+      <a routerLink="/">Home</a>
+      <a routerLink="/todos">Todos</a>
+      <a routerLink="/todos/add">Adicionar Todo</a>
+      <a routerLink="/cep">Cep</a>
+      <a routerLink="/auth/login">Login</a>
+      <a routerLink="/auth/register">Cadastro</a>
+    </nav>
+  <h1 class="display-4">Olá, {{ (user$ | async).email }}</h1>
+  <button (click)="logout()">Sair</button>
+</div>
+
+<ng-template #deslogado>
+  <nav class="navbar navbar-light bg-light">
     <a routerLink="/">Home</a>
     <a routerLink="/todos">Todos</a>
     <a routerLink="/todos/add">Adicionar Todo</a>
     <a routerLink="/cep">Cep</a>
     <a routerLink="/auth/login">Login</a>
     <a routerLink="/auth/register">Cadastro</a>
-</nav>
+  </nav>
+</ng-template>
 
 <router-outlet></router-outlet>
